@@ -1,7 +1,7 @@
 #include <WiFi.h>
 
-#define AP_SSID "RP-Pico_AP"
-#define PASSWORD "password"
+#define AP_SSID "Nixie Clock AP"
+#define PASSWORD "spaghetti"
 
 WiFiServer server(80);  // Set web server port number to 80
 
