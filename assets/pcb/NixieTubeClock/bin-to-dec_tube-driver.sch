@@ -390,30 +390,6 @@
 <wire x1="-3.81" y1="0" x2="3.81" y2="0" width="0.127" layer="21"/>
 <text x="6.35" y="0" size="1.016" layer="27" align="center-left">&gt;VALUE</text>
 </package>
-<package name="RESISTOR_10.16MM">
-<pad name="2" x="5.08" y="0" drill="1.016" diameter="1.778"/>
-<pad name="1" x="-5.08" y="0" drill="1.016" diameter="1.778"/>
-<wire x1="-2.54" y1="-0.889" x2="2.54" y2="-0.889" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-0.889" x2="2.54" y2="0" width="0.127" layer="21"/>
-<wire x1="2.54" y1="0" x2="2.54" y2="0.889" width="0.127" layer="21"/>
-<wire x1="2.54" y1="0.889" x2="-2.54" y2="0.889" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="0.889" x2="-2.54" y2="0" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="0" x2="-2.54" y2="-0.889" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="0" x2="-5.08" y2="0" width="0.127" layer="21"/>
-<wire x1="2.54" y1="0" x2="5.08" y2="0" width="0.127" layer="21"/>
-<text x="0" y="1.651" size="1.016" layer="25" align="center">&gt;NAME</text>
-<text x="0" y="0" size="1.016" layer="27" align="center">&gt;VALUE</text>
-</package>
-<package name="RESISTOR_2.54MM">
-<pad name="1" x="-1.27" y="0" drill="1.016" diameter="1.778" rot="R90"/>
-<pad name="2" x="1.27" y="0" drill="1.016" diameter="1.778" rot="R90"/>
-<text x="-3.302" y="0" size="1.016" layer="25" rot="R270" align="center">&gt;NAME</text>
-<text x="3.175" y="0" size="1.016" layer="27" align="center-left">&gt;VALUE</text>
-<wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-1.27" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-1.27" x2="-2.54" y2="1.27" width="0.127" layer="21"/>
-</package>
 </packages>
 <symbols>
 <symbol name="PORT_13-PIN">
@@ -565,16 +541,6 @@
 <pin name="2" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
 <text x="0" y="2.54" size="0.8128" layer="95" align="center">&gt;NAME</text>
 <text x="0" y="-2.54" size="0.8128" layer="96" align="center">&gt;VALUE</text>
-</symbol>
-<symbol name="RESISTOR">
-<wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-1.27" x2="2.54" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-1.27" x2="2.54" y2="1.27" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-1.27" x2="-2.54" y2="1.27" width="0.254" layer="94"/>
-<pin name="1" x="-7.62" y="0" visible="off" length="middle" swaplevel="1"/>
-<pin name="2" x="7.62" y="0" visible="off" length="middle" swaplevel="1" rot="R180"/>
-<text x="-2.032" y="0" size="0.8128" layer="95" align="center-left">&gt;NAME</text>
-<text x="0" y="-2.54" size="0.8128" layer="96" align="bottom-center">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -878,31 +844,6 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="RESISTOR" prefix="R" uservalue="yes">
-<gates>
-<gate name="R" symbol="RESISTOR" x="0" y="0" swaplevel="1"/>
-</gates>
-<devices>
-<device name="" package="RESISTOR_10.16MM">
-<connects>
-<connect gate="R" pin="1" pad="1"/>
-<connect gate="R" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="_2.54MM" package="RESISTOR_2.54MM">
-<connects>
-<connect gate="R" pin="1" pad="1"/>
-<connect gate="R" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -933,7 +874,6 @@
 <part name="U$9" library="myLibrary" deviceset="GND" device=""/>
 <part name="U$10" library="myLibrary" deviceset="GND" device=""/>
 <part name="W1" library="myLibrary" deviceset="WIRE" device="_7.62MM"/>
-<part name="R1" library="myLibrary" deviceset="RESISTOR" device="" value="10k"/>
 <part name="U$11" library="myLibrary" deviceset="+V" device=""/>
 </parts>
 <sheets>
@@ -986,11 +926,7 @@
 <attribute name="NAME" x="73.66" y="58.42" size="0.8128" layer="95" align="center"/>
 <attribute name="VALUE" x="73.66" y="53.34" size="0.8128" layer="96" align="center"/>
 </instance>
-<instance part="R1" gate="R" x="78.74" y="22.86" smashed="yes" rot="R90">
-<attribute name="NAME" x="78.74" y="20.828" size="0.8128" layer="95" rot="R90" align="center-left"/>
-<attribute name="VALUE" x="81.28" y="22.86" size="0.8128" layer="96" rot="R90" align="bottom-center"/>
-</instance>
-<instance part="U$11" gate="+V" x="78.74" y="30.48" smashed="yes"/>
+<instance part="U$11" gate="+V" x="81.28" y="15.24" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -1031,7 +967,8 @@
 <pinref part="U$1" gate="+V" pin="+V"/>
 </segment>
 <segment>
-<pinref part="R1" gate="R" pin="2"/>
+<pinref part="P1" gate="P" pin="1"/>
+<wire x1="91.44" y1="15.24" x2="81.28" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="U$11" gate="+V" pin="+V"/>
 </segment>
 </net>
@@ -1229,13 +1166,6 @@
 <pinref part="IC1" gate="IC" pin="A"/>
 <wire x1="27.94" y1="25.4" x2="30.48" y2="25.4" width="0.1524" layer="91"/>
 <label x="25.4" y="25.4" size="1.778" layer="95" align="center-right"/>
-</segment>
-</net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="P1" gate="P" pin="1"/>
-<pinref part="R1" gate="R" pin="1"/>
-<wire x1="91.44" y1="15.24" x2="78.74" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
