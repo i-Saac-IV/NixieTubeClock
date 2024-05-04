@@ -1,3 +1,32 @@
+//SDA --> GP4
+//SCL --> GP5
+
+#define HH_A 2
+#define HH_B 3
+#define HH_C 6
+#define HH_D 7
+
+#define H_A 8
+#define H_B 9
+#define H_C 10
+#define H_D 11
+
+#define MM_A 12
+#define MM_B 13
+#define MM_C 17
+#define MM_D 18
+
+#define M_A 19
+#define M_B 20
+#define M_C 21
+#define M_D 22
+
+#define S_PIN 14
+#define HV_ENABLE_PIN 15
+
+const int pinArray[] = { HH_A, HH_B, HH_C, HH_D, H_A, H_B, H_C, H_D, MM_A, MM_B, MM_C, MM_D, M_A, M_B, M_C, M_D };
+const int numPins = sizeof(pinArray) / sizeof(pinArray[0]);
+
 #include <WiFi.h>
 
 #define AP_SSID "Nixie Clock AP"
@@ -7,14 +36,14 @@ WiFiServer server(80);  // Set web server port number to 80
 
 String header;
 
-uint16_t year = 1;
+uint16_t year = 2000;
 uint8_t month = 1;
 uint8_t day = 1;
 uint8_t hour = 1;
 uint8_t minute = 1;
 
-uint8_t alarmHour = 8;
-uint8_t alarmMinute = 30;
+uint8_t alarmHour = 9;
+uint8_t alarmMinute = 0;
 
 bool alarmEnabled = 0;
 
@@ -22,10 +51,18 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
 
+  for (int i = 0; i < numPins; i++) {
+    pinMode(pinArray[i], OUTPUT);
+  }
+  pinMode(S_PIN, OUTPUT);
+  pinMode(HV_ENABLE_PIN, OUTPUT);
+
+  digitalWrite(HV_ENABLE_PIN, HIGH);
+
   Serial.println();
   Serial.println(__FILE__);
-  Serial.println("Starting AP...");
 
+  Serial.println("Starting AP...");
   WiFi.softAP(AP_SSID, PASSWORD);
 
   Serial.print("Sever IP address: ");
@@ -35,6 +72,18 @@ void setup() {
 }
 
 void loop() {
+  for (int i = 0; i < numPins; i++) {
+    digitalWrite(pinArray[i], HIGH);
+    delay(100);
+    digitalWrite(pinArray[i], LOW);
+  }
+}
+
+void send_value(uint8_t tubeIndex, uint8_t val) {
+
+}
+
+void load_webpage() {
   WiFiClient client = server.available();
 
   if (client) {  //checks to see if a client is connected
@@ -51,6 +100,7 @@ void loop() {
         (because if it's not it is cleared later on in the code)
         a blank line represents the end of a request.
         */
+
           if (currentLine.length() == 0) {  //checks to see if any data has ben sent during this request
             //if no data has been sent, beign to serve the webpage, starting with an ack. respones
             client.println("HTTP/1.1 200 OK");         //ack
@@ -120,7 +170,7 @@ void loop() {
 
             client.println("<main>");  //main
             client.println("<div class=\"container\">");
-            client.println("<p><strong>Welcome to the clock-setting website!</strong><br>Here, you can adjust the day and time on your nixie clock, as well as enable and set alarm.<br>Just fill out the suitable following form(s).</p>");
+            client.println("<p><strong>Welcome to the clock-setting website!</strong><br>Here, you can adjust the day and time on your nixie clock, as well as enable and set the alarm.<br>Just fill out the suitable following form(s).</p>");
             client.println("<form><br>");
             client.println("<p>Current date and time: ");
             client.println("<div class=\"container3\">");
